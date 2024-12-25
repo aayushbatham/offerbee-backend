@@ -1,4 +1,4 @@
-import {IsDate, IsNumber, IsString, IsBoolean} from "class-validator";
+import {IsDate, IsNumber, IsString, IsBoolean, IsOptional, IsEnum, IsArray, Min, Max} from "class-validator";
 import {Type} from "class-transformer";
 
 export class createVoucher{
@@ -24,4 +24,18 @@ export class createVoucher{
     usageLimit?: number;
     @IsBoolean()
     reusable: boolean;
+    @IsOptional()
+    @IsEnum(['male', 'female', 'other'])
+    gender?: 'male' | 'female' | 'other';
+
+    @IsOptional()
+    @IsArray()
+    @Min(0, { each: true })
+    @Max(150, { each: true })
+    ageRange?: [number, number];
+
+    @IsOptional()
+    @IsEnum(['new', 'old'])
+    userType?: 'new' | 'old';
+
 }

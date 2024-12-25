@@ -54,6 +54,23 @@ export class Voucher extends Document {
     @Prop({default: false})
     reusable: boolean;
 
+    @Prop({
+        type: Object,
+        default: {},
+        description: 'Categories for eligibility, e.g., {gender: "male", ageRange: [18, 60], userType: "new"}',
+    })
+    eligibilityCriteria: {
+        gender?: string;
+        ageRange?: [number, number]; // Min and max age
+        userType?: 'new' | 'old';
+    };
 }
 
 export const VoucherSchema = SchemaFactory.createForClass(Voucher);
+
+VoucherSchema.pre('save', function (next) {
+    if (this.discountType === 'fixed') {
+        this.maxDiscount = this.discountValue; // Automatically set maxDiscount for fixed type
+    }
+    next();
+});

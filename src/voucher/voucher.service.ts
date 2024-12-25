@@ -12,6 +12,9 @@ export class VoucherService{
 
     // create voucher
     async createVoucher(createVoucher : createVoucher, userId: string): Promise<Voucher> {
+        if (createVoucher.discountType === 'fixed') {
+            createVoucher.maxDiscount = createVoucher.discountValue;
+        }
         const newVoucher = new this.voucherModel({
             // spread the value of createVoucher dto into the new document
             ...createVoucher,
@@ -35,6 +38,7 @@ export class VoucherService{
         const voucher = await this.voucherModel.findOne({
             voucherCode: useVoucherDto.voucherCode 
         });
+
 
         if (!voucher) {
             throw new NotFoundException("Voucher not found");
