@@ -1,10 +1,18 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb+srv://aayush:12345@atlascluster.i90q0bw.mongodb.net/voucher-service"),
+    ConfigModule, // Ensure ConfigModule is imported
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule], // Import ConfigModule for dynamic configuration
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_URI'),
+      }),
+    }),
   ],
 })
 export class DatabaseModule implements OnModuleInit {
