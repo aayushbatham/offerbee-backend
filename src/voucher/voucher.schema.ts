@@ -54,8 +54,6 @@ export class Voucher extends Document {
     @Prop({default: false})
     reusable: boolean;
 
-
-    // TODO : Categories wala section in backend
     @Prop({
         type: Object,
         default: {},
