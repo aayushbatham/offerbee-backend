@@ -10,7 +10,7 @@ import { NotFoundException, BadRequestException } from '@nestjs/common';
 export class VoucherService{
     constructor(@InjectModel(Voucher.name) private readonly voucherModel: Model<Voucher>) {}
 
-    // create voucher
+    // create voucher (admin ke liye)
     async createVoucher(createVoucher : createVoucher, userId: string): Promise<Voucher> {
         if (createVoucher.discountType === 'fixed') {
             createVoucher.maxDiscount = createVoucher.discountValue;

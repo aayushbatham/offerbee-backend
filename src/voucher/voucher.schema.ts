@@ -33,7 +33,7 @@ export class Voucher extends Document {
     usageLimit: number;
 
     @Prop({ type: Object, default: null })
-    conditions: any; // e.g., product restrictions, category restrictions, etc.
+    conditions: any;
 
     @Prop({default:true})
     isActive: boolean;
@@ -42,7 +42,7 @@ export class Voucher extends Document {
     totalUsageCount: number;
 
     @Prop({
-        type: [String], // Assuming user IDs are strings
+        type: [String],
         default: [],
         description: 'Array of user IDs who have used this voucher'
     })
@@ -54,6 +54,8 @@ export class Voucher extends Document {
     @Prop({default: false})
     reusable: boolean;
 
+
+    // TODO : Categories wala section in backend
     @Prop({
         type: Object,
         default: {},
@@ -61,7 +63,7 @@ export class Voucher extends Document {
     })
     eligibilityCriteria: {
         gender?: string;
-        ageRange?: [number, number]; // Min and max age
+        ageRange?: [number, number];
         userType?: 'new' | 'old';
     };
 }
