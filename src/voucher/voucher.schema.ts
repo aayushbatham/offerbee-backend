@@ -32,9 +32,6 @@ export class Voucher extends Document {
     @Prop({default:1})
     usageLimit: number;
 
-    @Prop({ type: Object, default: null })
-    conditions: any;
-
     @Prop({default:true})
     isActive: boolean;
 
@@ -62,7 +59,7 @@ export class Voucher extends Document {
     eligibilityCriteria: {
         gender?: string;
         ageRange?: [number, number];
-        userType?: 'new' | 'old';
+        userType?: 'new' | 'old' ;
     };
 }
 

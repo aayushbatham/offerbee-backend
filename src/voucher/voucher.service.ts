@@ -16,7 +16,6 @@ export class VoucherService{
             createVoucher.maxDiscount = createVoucher.discountValue;
         }
         const newVoucher = new this.voucherModel({
-            // spread the value of createVoucher dto into the new document
             ...createVoucher,
             createdBy: userId
         });
